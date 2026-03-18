@@ -767,19 +767,14 @@
       </div>
 
       <div class="video-wrapper">
-        <!-- ═══════════════════════════════════════════════════════════
-             PLACEHOLDER — À remplacer par votre iframe HeyGen/YouTube
-             Une fois la vidéo générée, remplacez le bloc .video-player-area
-             par :
-             <div class="video-player-area">
-               <iframe src="https://www.youtube.com/embed/VOTRE_ID?rel=0&modestbranding=1" title="Présentation OakflowAI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-             </div>
-             ═══════════════════════════════════════════════════════════ -->
-        <div class="video-player-area" id="videoPlaceholder" onclick="playVideo()">
-          <div class="play-btn" aria-label="Regarder la présentation">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-          </div>
-          <span class="video-label">Regarder la présentation — 60 secondes</span>
+        <div class="video-player-area">
+          <iframe
+            src="https://www.youtube.com/embed/xkG3dhzfTHQ?rel=0&modestbranding=1&color=white"
+            title="Découvrez le guide OakflowAI en 60 secondes"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
         </div>
 
         <!-- BARRE CTA SOUS LE PLAYER -->
@@ -925,16 +920,6 @@
   </a>
 
   <script>
-    // Gestion du placeholder vidéo
-    // Remplacez VIDEO_ID par l'ID YouTube réel une fois la vidéo HeyGen uploadée
-    const VIDEO_ID = 'xkG3dhzfTHQ';
-    function playVideo() {
-      if (!VIDEO_ID) return; // Placeholder actif tant que VIDEO_ID est vide
-      const area = document.getElementById('videoPlaceholder');
-      area.onclick = null;
-      area.innerHTML = '<iframe src="https://www.youtube.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0&modestbranding=1" title="Présentation OakflowAI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-    }
-
     // FAQ toggle
     function toggleFaq(el) {
       const item = el.parentElement;
