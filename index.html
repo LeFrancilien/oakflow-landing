@@ -282,29 +282,66 @@
     /* ===== VIDEO SECTION ===== */
     .video-section { background: linear-gradient(135deg, #0A0A18 0%, #0D0820 100%); }
     .video-wrapper {
-      max-width: 720px; margin: 48px auto 0;
+      max-width: 760px; margin: 48px auto 0;
       background: var(--dark-card); border: 1px solid var(--dark-border);
       border-radius: 20px; overflow: hidden;
-      box-shadow: 0 0 60px rgba(0,229,201,0.1);
+      box-shadow: 0 0 80px rgba(0,229,201,0.15);
     }
-    .video-placeholder {
+    .video-player-area {
       aspect-ratio: 16/9; background: linear-gradient(135deg, #0D0D20, #150D25);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 16px; cursor: pointer; position: relative;
+      gap: 16px; cursor: pointer; position: relative; overflow: hidden;
     }
-    .video-placeholder::before {
+    .video-player-area::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,229,201,0.05), transparent);
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(0,229,201,0.07), transparent);
+      pointer-events: none;
+    }
+    .video-player-area iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
     }
     .play-btn {
-      width: 72px; height: 72px; border-radius: 50%;
+      width: 80px; height: 80px; border-radius: 50%;
       background: var(--gradient-cta);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 40px rgba(0,229,201,0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 50px rgba(0,229,201,0.4);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; z-index: 2;
     }
-    .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 60px rgba(0,229,201,0.5); }
-    .video-label { font-size: 14px; color: var(--text-muted); }
+    .play-btn:hover { transform: scale(1.12); box-shadow: 0 0 80px rgba(0,229,201,0.6); }
+    .video-label { font-size: 13px; color: var(--text-muted); letter-spacing: 0.04em; position: relative; z-index: 2; }
+    .video-cta-bar {
+      padding: 28px 32px;
+      background: linear-gradient(135deg, rgba(0,229,201,0.04), rgba(123,63,160,0.04));
+      border-top: 1px solid var(--dark-border);
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      flex-wrap: wrap;
+    }
+    .video-cta-text { flex: 1; }
+    .video-cta-text strong { display: block; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .video-cta-text span { font-size: 13px; color: var(--text-muted); }
+    .video-cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gradient-cta); color: var(--white);
+      font-weight: 800; font-size: 15px; padding: 14px 28px;
+      border-radius: 10px; border: none; cursor: pointer; white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(0,229,201,0.25);
+      text-decoration: none;
+    }
+    .video-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,229,201,0.45); }
+    .video-key-points {
+      display: flex; justify-content: center; gap: 32px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .video-key-point {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-muted);
+    }
+    .video-key-point svg { color: var(--cyan); flex-shrink: 0; }
+    @media (max-width: 600px) {
+      .video-cta-bar { flex-direction: column; align-items: stretch; text-align: center; }
+      .video-cta-btn { justify-content: center; }
+    }
 
     /* ===== CTA FINAL ===== */
     .cta-final {
@@ -720,16 +757,62 @@
     </div>
   </section>
 
-  <!-- SOCIAL PROOF IMAGE -->
-  <section class="video-section section">
+  <!-- VIDEO SECTION -->
+  <section class="video-section section" id="video">
     <div class="container">
       <div class="text-center">
-        <span class="badge">Ils témoignent</span>
-        <h2 class="section-title" style="margin-top:16px">Des résultats concrets, dès la première semaine</h2>
-        <p class="section-subtitle">Artisans, restaurateurs, freelances — ils ont mis en place leurs premières automatisations et ne reviennent pas en arrière.</p>
+        <span class="badge">Présentation vidéo</span>
+        <h2 class="section-title" style="margin-top:16px">Découvrez le guide en <span class="text-cyan">60 secondes</span></h2>
+        <p class="section-subtitle">Cyril vous explique exactement ce que vous allez apprendre et comment l'appliquer dès aujourd'hui dans votre entreprise.</p>
       </div>
-      <div style="margin-top:40px;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,229,201,0.12);">
-        <img src="assets/social_proof.png" alt="Témoignages utilisateurs OakflowAI — 10h gagnées, 0 relance oubliée, devis automatiques" style="width:100%;display:block;" />
+
+      <div class="video-wrapper">
+        <!-- ═══════════════════════════════════════════════════════════
+             PLACEHOLDER — À remplacer par votre iframe HeyGen/YouTube
+             Une fois la vidéo générée, remplacez le bloc .video-player-area
+             par :
+             <div class="video-player-area">
+               <iframe src="https://www.youtube.com/embed/VOTRE_ID?rel=0&modestbranding=1" title="Présentation OakflowAI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             </div>
+             ═══════════════════════════════════════════════════════════ -->
+        <div class="video-player-area" id="videoPlaceholder" onclick="playVideo()">
+          <div class="play-btn" aria-label="Regarder la présentation">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <span class="video-label">Regarder la présentation — 60 secondes</span>
+        </div>
+
+        <!-- BARRE CTA SOUS LE PLAYER -->
+        <div class="video-cta-bar">
+          <div class="video-cta-text">
+            <strong>Prêt à automatiser votre TPE ?</strong>
+            <span>Guide + bonus workflow devis · Accès immédiat · Satisfait ou remboursé 30 jours</span>
+          </div>
+          <a href="https://shop.beacons.ai/oakflow/7632b524-e274-42c7-bf02-3324dba733ab" target="_blank" rel="noopener noreferrer" class="video-cta-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Obtenir le guide — 7€
+          </a>
+        </div>
+      </div>
+
+      <!-- POINTS CLÉS -->
+      <div class="video-key-points">
+        <div class="video-key-point">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Pas de code requis
+        </div>
+        <div class="video-key-point">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          10 automatisations clé-en-main
+        </div>
+        <div class="video-key-point">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Mise en place en moins d'une journée
+        </div>
+        <div class="video-key-point">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          7€ seulement — accès à vie
+        </div>
       </div>
     </div>
   </section>
@@ -842,6 +925,16 @@
   </a>
 
   <script>
+    // Gestion du placeholder vidéo
+    // Remplacez VIDEO_ID par l'ID YouTube réel une fois la vidéo HeyGen uploadée
+    const VIDEO_ID = 'xkG3dhzfTHQ';
+    function playVideo() {
+      if (!VIDEO_ID) return; // Placeholder actif tant que VIDEO_ID est vide
+      const area = document.getElementById('videoPlaceholder');
+      area.onclick = null;
+      area.innerHTML = '<iframe src="https://www.youtube.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0&modestbranding=1" title="Présentation OakflowAI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    }
+
     // FAQ toggle
     function toggleFaq(el) {
       const item = el.parentElement;
